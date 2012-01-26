@@ -31,6 +31,18 @@
 
 
 
+#pragma mark - IBActions
+
+- (IBAction)showInfo:(id)sender
+{
+	if (_infoPanelCtrl.window.isVisible)
+    	[_infoPanelCtrl close];
+    else
+		[_infoPanelCtrl showWindow:self];
+}
+
+
+
 #pragma mark - Notifications
 
 - (void)documentSelectionDidChange:(NSNotification *)note

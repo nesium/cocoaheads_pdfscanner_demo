@@ -7,12 +7,13 @@
 //
 
 #import "NSMDocument.h"
+#import "NSMPDFPageView.h"
 
 NSString *const NSMDocumentBecameMainNotification = @"NSMDocumentBecameMainNotification";
 
 @implementation NSMDocument
 {
-	IBOutlet NSTextField *_titleLabel;
+	IBOutlet NSMPDFPageView *_pdfPageView;
 }
 
 @synthesize pdfDocument;
@@ -36,7 +37,11 @@ NSString *const NSMDocumentBecameMainNotification = @"NSMDocumentBecameMainNotif
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
-    _titleLabel.stringValue = pdfDocument.title;
+    
+	if (pdfDocument.numPages < 1)
+    	return;
+    
+    _pdfPageView.page = [pdfDocument.pages objectAtIndex:0];
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError

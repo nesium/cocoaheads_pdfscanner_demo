@@ -7,6 +7,7 @@
 //
 
 #import "NSMPDFDocument.h"
+#import "NSMPDFPage.h"
 
 @interface NSMPDFDocument ()
 - (id)initWithCGPDFDocument:(CGPDFDocumentRef)document;
@@ -17,6 +18,7 @@
 @implementation NSMPDFDocument
 {
 	CGPDFDocumentRef _pdf;
+    NSArray *_pages;
 }
 
 @synthesize minorVersion, majorVersion, title, author, subject, keywords, creator, producer, 
@@ -43,7 +45,7 @@
     CFRelease(dataProvider);
 	
 	self = [self initWithCGPDFDocument:document];
-    if (document != NULL) {
+    if (document != NULL){
         CFRelease(document);
     }
 	return self;
@@ -52,11 +54,11 @@
 - (id)initWithCGPDFDocument:(CGPDFDocumentRef)document
 {
     if ((self = [super init])){
-        if (document == NULL) {
+        if (document == NULL){
 			NSLog(@"Could not open PDF");
             return nil;
         }else{
-            _pdf = (CGPDFDocumentRef)CFRetain(document);
+            _pdf = CGPDFDocumentRetain(document);
             [self loadDocumentInfo];
         }
     }
@@ -65,6 +67,7 @@
 
 - (void)dealloc
 {
+	[_pages release];
 	CGPDFDocumentRelease(_pdf);
     [title release];
     [author release];
@@ -84,6 +87,20 @@
 - (NSUInteger)numPages
 {
 	return CGPDFDocumentGetNumberOfPages(_pdf);
+}
+
+- (NSArray *)pages
+{
+	if (!_pages){
+    	NSMutableArray *pages = [NSMutableArray arrayWithCapacity:self.numPages];
+    	for (NSInteger i = 1; i <= self.numPages; i++){
+			NSMPDFPage *page = [[NSMPDFPage alloc] initWithPage:CGPDFDocumentGetPage(_pdf, i) 
+            	index:i];
+			[pages addObject:page];
+        }
+        _pages = [pages copy];
+    }
+    return _pages;
 }
 
 

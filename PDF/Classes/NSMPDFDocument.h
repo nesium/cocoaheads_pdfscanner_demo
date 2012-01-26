@@ -20,6 +20,7 @@
 @property (nonatomic, readonly) NSDate *creationDate;
 @property (nonatomic, readonly) NSDate *modificationDate;
 
+@property (nonatomic, readonly) NSArray *pages;
 @property (nonatomic, readonly) NSUInteger numPages;
 
 - (id)initWithFilename:(NSString *)filename;

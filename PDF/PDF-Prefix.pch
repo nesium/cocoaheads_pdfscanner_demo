@@ -4,4 +4,14 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+    
+    #ifdef DEBUG
+        #if __has_feature(objc_arc)
+            #define NDCLog(...) CFShow((__bridge CFStringRef)[NSString stringWithFormat:@"%s (%d) \n\t %@", __PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:__VA_ARGS__]])
+        #else
+            #define NDCLog(...) CFShow([NSString stringWithFormat:@"%s (%d) \n\t %@", __PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:__VA_ARGS__]])
+        #endif
+    #else
+        #define NDCLog(...)
+    #endif
 #endif
