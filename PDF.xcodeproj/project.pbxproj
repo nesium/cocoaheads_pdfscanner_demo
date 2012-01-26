@@ -25,6 +25,7 @@
 		2C79E6F014D0E51500855FBD /* NSMPDFPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C79E6EC14D0E51500855FBD /* NSMPDFPage.m */; };
 		2C79E6F114D0E51500855FBD /* NSMPDFPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C79E6EE14D0E51500855FBD /* NSMPDFPageView.m */; };
 		2C79E6F214D0E51500855FBD /* NSMPDFParsingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C79E6EF14D0E51500855FBD /* NSMPDFParsingFunctions.m */; };
+		2C79E70514D1929400855FBD /* NSMPDFPage+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C79E70414D1929400855FBD /* NSMPDFPage+Parsing.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		2C79E6ED14D0E51500855FBD /* NSMPDFPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMPDFPageView.h; sourceTree = "<group>"; };
 		2C79E6EE14D0E51500855FBD /* NSMPDFPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMPDFPageView.m; sourceTree = "<group>"; };
 		2C79E6EF14D0E51500855FBD /* NSMPDFParsingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMPDFParsingFunctions.m; sourceTree = "<group>"; };
+		2C79E70314D1929400855FBD /* NSMPDFPage+Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMPDFPage+Parsing.h"; sourceTree = "<group>"; };
+		2C79E70414D1929400855FBD /* NSMPDFPage+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMPDFPage+Parsing.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +209,8 @@
 				2C79E6EC14D0E51500855FBD /* NSMPDFPage.m */,
 				2C79E6ED14D0E51500855FBD /* NSMPDFPageView.h */,
 				2C79E6EE14D0E51500855FBD /* NSMPDFPageView.m */,
+				2C79E70314D1929400855FBD /* NSMPDFPage+Parsing.h */,
+				2C79E70414D1929400855FBD /* NSMPDFPage+Parsing.m */,
 				2C79E6EF14D0E51500855FBD /* NSMPDFParsingFunctions.m */,
 			);
 			name = PDF;
@@ -329,6 +334,7 @@
 				2C79E6F014D0E51500855FBD /* NSMPDFPage.m in Sources */,
 				2C79E6F114D0E51500855FBD /* NSMPDFPageView.m in Sources */,
 				2C79E6F214D0E51500855FBD /* NSMPDFParsingFunctions.m in Sources */,
+				2C79E70514D1929400855FBD /* NSMPDFPage+Parsing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +522,7 @@
 				2C79E69714D0D73100855FBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C79E69814D0D73100855FBD /* Build configuration list for PBXNativeTarget "PDFTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +531,7 @@
 				2C79E69A14D0D73100855FBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

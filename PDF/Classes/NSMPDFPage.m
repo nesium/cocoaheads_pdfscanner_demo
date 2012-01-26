@@ -7,12 +7,11 @@
 //
 
 #import "NSMPDFPage.h"
-#import "NSMPDFParsingFunctions.m"
+#import "NSMPDFPage+Parsing.h"
 
 @implementation NSMPDFPage
-{
-	CGPDFPageRef _page;
-}
+
+@synthesize clippingEnabled;
 
 #pragma mark - Initialization & Deallocation
 
@@ -36,20 +35,10 @@
 
 - (void)drawInContext:(CGContextRef)ctx
 {
-	CGPDFOperatorTableRef op = CGPDFOperatorTableCreate();
-	
-    // Append rectangle to path
-	CGPDFOperatorTableSetCallback(op, "re", &NSMPDF_op_re);
-    // Set RGB color for nonstroking operations
-	CGPDFOperatorTableSetCallback(op, "rg", &NSMPDF_op_rg);
-    // Fill path using nonzero winding number rule
-	CGPDFOperatorTableSetCallback(op, "f", &NSMPDF_op_f);
-	
-	CGPDFContentStreamRef contentStream = CGPDFContentStreamCreateWithPage(_page);
-	CGPDFScannerRef scanner = CGPDFScannerCreate(contentStream, op, ctx);
-	CGPDFScannerScan(scanner);
-	CGPDFScannerRelease(scanner);
-	CGPDFContentStreamRelease(contentStream);
-	CGPDFOperatorTableRelease(op);
+	_ctx = CGContextRetain(ctx);
+    [self parseResources];
+    [self scanPage];
+    CGContextRelease(_ctx);
+    _ctx = nil;
 }
 @end

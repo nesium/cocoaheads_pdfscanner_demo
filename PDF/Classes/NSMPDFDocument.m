@@ -97,6 +97,7 @@
 			NSMPDFPage *page = [[NSMPDFPage alloc] initWithPage:CGPDFDocumentGetPage(_pdf, i) 
             	index:i];
 			[pages addObject:page];
+            [page release];
         }
         _pages = [pages copy];
     }

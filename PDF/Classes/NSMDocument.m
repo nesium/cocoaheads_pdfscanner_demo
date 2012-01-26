@@ -11,9 +11,15 @@
 
 NSString *const NSMDocumentBecameMainNotification = @"NSMDocumentBecameMainNotification";
 
+@interface NSMDocument ()
+- (void)applyPage;
+@end
+
+
 @implementation NSMDocument
 {
 	IBOutlet NSMPDFPageView *_pdfPageView;
+    BOOL _clippingEnabled;
 }
 
 @synthesize pdfDocument;
@@ -37,11 +43,12 @@ NSString *const NSMDocumentBecameMainNotification = @"NSMDocumentBecameMainNotif
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
     [super windowControllerDidLoadNib:aController];
+    _clippingEnabled = YES;
     
 	if (pdfDocument.numPages < 1)
     	return;
     
-    _pdfPageView.page = [pdfDocument.pages objectAtIndex:0];
+	[self applyPage];
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
@@ -54,11 +61,32 @@ NSString *const NSMDocumentBecameMainNotification = @"NSMDocumentBecameMainNotif
 
 
 
+#pragma mark - Action methods
+
+- (void)toggleClipping:(id)sender
+{
+	_clippingEnabled = !_clippingEnabled;
+	[self applyPage];
+}
+
+
+
 #pragma mark - NSWindowDelegate methods
 
 - (void)windowDidBecomeMain:(NSNotification *)notification
 {
 	[[NSNotificationCenter defaultCenter] 
     	postNotificationName:NSMDocumentBecameMainNotification object:self];
+}
+
+
+
+#pragma mark - Private methods
+
+- (void)applyPage
+{
+    NSMPDFPage *page = [pdfDocument.pages objectAtIndex:0];
+    page.clippingEnabled = _clippingEnabled;
+    _pdfPageView.page = page;
 }
 @end
