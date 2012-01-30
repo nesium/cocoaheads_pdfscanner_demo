@@ -8,6 +8,7 @@
 
 #import "NSMPDFPage.h"
 #import "NSMPDFPage+Parsing.h"
+#import "NSMPDFContext.h"
 
 @implementation NSMPDFPage
 
@@ -19,12 +20,17 @@
 {
 	if ((self = [super init])){
         _page = CGPDFPageRetain(page);
+        _context = nil;
+        _xObjects = NULL;
+        _fonts = NULL;
+        _loadedFonts = nil;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[_loadedFonts release];
 	CGPDFPageRelease(_page);
 	[super dealloc];
 }
@@ -35,10 +41,10 @@
 
 - (void)drawInContext:(CGContextRef)ctx
 {
-	_ctx = CGContextRetain(ctx);
+	_context = [[NSMPDFContext alloc] initWithGraphicsContext:ctx];
     [self parseResources];
     [self scanPage];
-    CGContextRelease(_ctx);
-    _ctx = nil;
+	[_context release];
+    _context = nil;
 }
 @end

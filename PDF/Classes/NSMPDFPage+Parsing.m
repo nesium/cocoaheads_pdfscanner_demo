@@ -11,9 +11,9 @@
 
 @implementation NSMPDFPage (Parsing)
 
-- (CGContextRef)context
+- (NSMPDFContext *)context
 {
-	return _ctx;
+	return _context;
 }
 
 - (void)parseResources
@@ -26,6 +26,11 @@
 	CGPDFDictionaryRef xObjects;
 	if (CGPDFDictionaryGetDictionary(resourceDict, "XObject", &xObjects)){
 		_xObjects = xObjects;
+    }
+    
+    CGPDFDictionaryRef fonts;
+    if (CGPDFDictionaryGetDictionary(resourceDict, "Font", &fonts)){
+    	_fonts = fonts;
     }
 }
 
@@ -61,6 +66,20 @@
 	CGPDFOperatorTableSetCallback(op, "n", &NSMPDF_op_n);
     // Invoke named XObject
 	CGPDFOperatorTableSetCallback(op, "Do", &NSMPDF_op_Do);
+    // Set text font and size
+	CGPDFOperatorTableSetCallback(op, "Tf", &NSMPDF_op_Tf);
+    // Set text matrix and text line matrix
+	CGPDFOperatorTableSetCallback(op, "Tm", &NSMPDF_op_Tm);
+    // Show text
+	CGPDFOperatorTableSetCallback(op, "Tj", &NSMPDF_op_Tj);
+    // Show text, allowing individual glyph positioning
+	CGPDFOperatorTableSetCallback(op, "TJ", &NSMPDF_op_TJ);
+    // Move text position
+	CGPDFOperatorTableSetCallback(op, "Td", &NSMPDF_op_Td);
+    // Move text position and set leading
+	CGPDFOperatorTableSetCallback(op, "TD", &NSMPDF_op_TD);
+    // Move to start of next text line
+	CGPDFOperatorTableSetCallback(op, "T*", &NSMPDF_op_T);
 	
 	CGPDFContentStreamRef contentStream = CGPDFContentStreamCreateWithPage(_page);
 	CGPDFScannerRef scanner = CGPDFScannerCreate(contentStream, op, self);
@@ -120,5 +139,28 @@
     CFRelease(data);
     
     return image;
+}
+
+- (NSMPDFFont *)fontForKey:(const char *)key
+{
+	if (_loadedFonts == nil){
+    	_loadedFonts = [[NSMutableDictionary alloc] initWithCapacity:
+        	CGPDFDictionaryGetCount(_fonts)];
+    }
+    
+    NSString *theKey = [NSString stringWithUTF8String:key];
+	NSMPDFFont *font = [_loadedFonts objectForKey:theKey];
+	if (font == nil){
+    	CGPDFDictionaryRef fontDict;
+        if (!CGPDFDictionaryGetDictionary(_fonts, key, &fontDict)){
+        	NDCLog(@"No font for id %s", key);
+            return nil;
+        }
+    	font = [[NSMPDFFont alloc] initWithFontDictionary:fontDict];
+        [_loadedFonts setObject:font forKey:theKey];
+        [font release];
+    }
+	
+	return font;
 }
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C209BD314D7446B00B038DC /* glyphlist.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C209BD214D7446B00B038DC /* glyphlist.txt */; };
+		2C5118D914D4B177009D5CD8 /* NSMPDFFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5118D814D4B177009D5CD8 /* NSMPDFFont.m */; };
+		2C5118DD14D5A5EB009D5CD8 /* NSMPDFContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5118DC14D5A5EB009D5CD8 /* NSMPDFContext.m */; };
 		2C79E66514D0D73100855FBD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C79E66414D0D73100855FBD /* Cocoa.framework */; };
 		2C79E66F14D0D73100855FBD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C79E66D14D0D73100855FBD /* InfoPlist.strings */; };
 		2C79E67114D0D73100855FBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C79E67014D0D73100855FBD /* main.m */; };
@@ -39,6 +42,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C209BD214D7446B00B038DC /* glyphlist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = glyphlist.txt; path = Resources/glyphlist.txt; sourceTree = "<group>"; };
+		2C5118D714D4B177009D5CD8 /* NSMPDFFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMPDFFont.h; sourceTree = "<group>"; };
+		2C5118D814D4B177009D5CD8 /* NSMPDFFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMPDFFont.m; sourceTree = "<group>"; };
+		2C5118DB14D5A5EB009D5CD8 /* NSMPDFContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMPDFContext.h; sourceTree = "<group>"; };
+		2C5118DC14D5A5EB009D5CD8 /* NSMPDFContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMPDFContext.m; sourceTree = "<group>"; };
 		2C79E66014D0D73100855FBD /* PDF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C79E66414D0D73100855FBD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2C79E66714D0D73100855FBD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -193,6 +201,7 @@
 		2C79E6D914D0DD4000855FBD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2C209BD214D7446B00B038DC /* glyphlist.txt */,
 				2C79E6DA14D0DDCD00855FBD /* InfoPanel.xib */,
 				2C79E67914D0D73100855FBD /* NSMDocument.xib */,
 				2C79E67C14D0D73100855FBD /* MainMenu.xib */,
@@ -212,6 +221,10 @@
 				2C79E70314D1929400855FBD /* NSMPDFPage+Parsing.h */,
 				2C79E70414D1929400855FBD /* NSMPDFPage+Parsing.m */,
 				2C79E6EF14D0E51500855FBD /* NSMPDFParsingFunctions.m */,
+				2C5118D714D4B177009D5CD8 /* NSMPDFFont.h */,
+				2C5118D814D4B177009D5CD8 /* NSMPDFFont.m */,
+				2C5118DB14D5A5EB009D5CD8 /* NSMPDFContext.h */,
+				2C5118DC14D5A5EB009D5CD8 /* NSMPDFContext.m */,
 			);
 			name = PDF;
 			sourceTree = "<group>";
@@ -292,6 +305,7 @@
 				2C79E67B14D0D73100855FBD /* NSMDocument.xib in Resources */,
 				2C79E67E14D0D73100855FBD /* MainMenu.xib in Resources */,
 				2C79E6DC14D0DDCD00855FBD /* InfoPanel.xib in Resources */,
+				2C209BD314D7446B00B038DC /* glyphlist.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +349,8 @@
 				2C79E6F114D0E51500855FBD /* NSMPDFPageView.m in Sources */,
 				2C79E6F214D0E51500855FBD /* NSMPDFParsingFunctions.m in Sources */,
 				2C79E70514D1929400855FBD /* NSMPDFPage+Parsing.m in Sources */,
+				2C5118D914D4B177009D5CD8 /* NSMPDFFont.m in Sources */,
+				2C5118DD14D5A5EB009D5CD8 /* NSMPDFContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

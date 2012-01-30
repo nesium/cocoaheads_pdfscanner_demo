@@ -7,11 +7,14 @@
 //
 
 #import "NSMPDFPage.h"
+#import "NSMPDFFont.h"
+#import "NSMPDFContext.h"
 
 @interface NSMPDFPage (Parsing)
-@property (nonatomic, readonly) CGContextRef context;
+@property (nonatomic, readonly) NSMPDFContext *context;
 
 - (CGImageRef)copyXObjectForKey:(const char *)key;
+- (NSMPDFFont *)fontForKey:(const char *)key;
 
 - (void)parseResources;
 - (void)scanPage;

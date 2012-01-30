@@ -8,12 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class NSMPDFFont;
+@class NSMPDFContext;
+
 @interface NSMPDFPage : NSObject
 {
 	@private
 		CGPDFPageRef _page;
-    	CGContextRef _ctx;
         CGPDFDictionaryRef _xObjects;
+        CGPDFDictionaryRef _fonts;
+        NSMutableDictionary *_loadedFonts;
+        NSMPDFContext *_context;
 }
 - (id)initWithPage:(CGPDFPageRef)page index:(NSUInteger)index;
 
